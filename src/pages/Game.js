@@ -7,6 +7,7 @@ import { fetchQuestions } from '../services/apiTrivia';
 class Game extends Component {
   state = {
     questions: [],
+    currentQuest: 0,
   };
 
   async componentDidMount() {
@@ -25,22 +26,20 @@ class Game extends Component {
   }
 
   render() {
-    const { questions } = this.state;
+    const { questions, currentQuest } = this.state;
     return (
       <div>
-        {console.log(questions)}
         <GameHeader />
         { questions.map((quest, index) => (
-          (index === 0)
-            ? (
+          index === currentQuest
+            && 
               <Questions
                 { ...quest }
                 key={ quest.question }
                 question={ quest.question }
                 correctAnswer={ quest.correct_answer }
                 incorrectAnswers={ quest.incorrect_answers }
-              />)
-            : <p key={ index } />
+              />
         ))}
       </div>
     );
