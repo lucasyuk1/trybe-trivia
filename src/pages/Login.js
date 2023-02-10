@@ -1,20 +1,21 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { submitLogin } from '../redux/actions';
 import { fetchToken } from '../services/apiTrivia';
 // import logo from './trivia.png';
 
 class Login extends Component {
   state = {
-    email: '',
+    gravatarEmail: '',
     name: '',
     isDisabled: true,
   };
 
   validateInputs = () => {
-    const { email, name } = this.state;
+    const { gravatarEmail, name } = this.state;
     const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\)?$/i;
-    const validateEmail = regex.test(email);
+    const validateEmail = regex.test(gravatarEmail);
     if (validateEmail && name.length > 0) {
       this.setState({ isDisabled: false });
     } else {
@@ -30,10 +31,12 @@ class Login extends Component {
   };
 
   handleClick = async () => {
+    const { name, gravatarEmail } = this.state;
     const data = await fetchToken();
     const { token } = data;
     localStorage.setItem('token', token);
-    const { history } = this.props;
+    const { history, dispatch } = this.props;
+    dispatch(submitLogin({ name, gravatarEmail }));
     history.push('/game');
   };
 
@@ -43,7 +46,7 @@ class Login extends Component {
   };
 
   render() {
-    const { email, name, isDisabled } = this.state;
+    const { gravatarEmail, name, isDisabled } = this.state;
     return (
       <div>
         {/* <header className="App-header">
@@ -51,13 +54,13 @@ class Login extends Component {
           <p>SUA VEZ</p>
         </header> */}
         <form>
-          <label htmlFor="email">
+          <label htmlFor="gravatarEmail">
             Email:
             <input
-              id="email"
-              name="email"
+              id="gravatarEmail"
+              name="gravatarEmail"
               type="email"
-              value={ email }
+              value={ gravatarEmail }
               onChange={ this.handleChange }
               data-testid="input-gravatar-email"
             />
@@ -98,6 +101,7 @@ Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect()(Login);

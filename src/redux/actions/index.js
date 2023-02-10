@@ -1,11 +1,8 @@
 import { SUBMIT_LOGIN } from './actionTypes';
 
-const submitLogin = (name, email) => ({
+const submitLogin = (payload) => ({
   type: SUBMIT_LOGIN,
-  payload: {
-    name,
-    email,
-  },
+  payload,
 });
 
 // const saveScore = (assertions, score) => ({
