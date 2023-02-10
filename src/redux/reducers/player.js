@@ -2,8 +2,8 @@ import { SUBMIT_LOGIN } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   name: '', // nome-da-pessoa,
-  assertions: '', // número-de-acertos,
-  score: '', // pontuação
+  assertions: 0, // número-de-acertos,
+  score: 0, // pontuação
   gravatarEmail: '', // email-da-pessoa,
 };
 
@@ -13,7 +13,8 @@ const player = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       name: action.payload.name,
-      gravatarEmail: action.payload.email,
+      gravatarEmail: action.payload.gravatarEmail,
+      score: 0,
     };
   // case SAVE_SCORE:
   //   return {
