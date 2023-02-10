@@ -32,14 +32,13 @@ class Game extends Component {
         <GameHeader />
         { questions.map((quest, index) => (
           index === currentQuest
-            && 
-              <Questions
-                { ...quest }
-                key={ quest.question }
-                question={ quest.question }
-                correctAnswer={ quest.correct_answer }
-                incorrectAnswers={ quest.incorrect_answers }
-              />
+            && <Questions
+              { ...quest }
+              key={ quest.question }
+              question={ quest.question }
+              correctAnswer={ quest.correct_answer }
+              incorrectAnswers={ quest.incorrect_answers }
+            />
         ))}
       </div>
     );
