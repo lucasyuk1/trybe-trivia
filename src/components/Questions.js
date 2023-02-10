@@ -12,7 +12,9 @@ class Questions extends Component {
 
   isCorrect = (choice) => {
     const { correctAnswer, incorrectAnswers } = this.props;
+
     let result = `wrong-answer-${incorrectAnswers.indexOf(choice)}`;
+
     if (correctAnswer === choice) {
       result = 'correct-answer';
     } return result;
@@ -20,6 +22,7 @@ class Questions extends Component {
 
   render() {
     const { category, question, correctAnswer, incorrectAnswers } = this.props;
+
     const answers = this.shuffleArray([correctAnswer, ...incorrectAnswers]);
 
     return (
@@ -31,6 +34,8 @@ class Questions extends Component {
             <button
               key={ index }
               data-testid={ this.isCorrect(answer) }
+              type="button"
+              onClick={ () => this.isCorrect(answer) }
             >
               { answer }
             </button>))}
