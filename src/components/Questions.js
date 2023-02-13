@@ -4,7 +4,19 @@ import PropTypes from 'prop-types';
 class Questions extends Component {
   state = {
     showColors: false,
+    answersOrder: [],
   };
+
+  componentDidMount() {
+    const { answersOrder } = this.state;
+    this.defineOrder();
+    console.log('ordem :', answersOrder);
+  }
+
+  componentDidUpdate() {
+    const { answersOrder } = this.state;
+    console.log('ordem update :', answersOrder);
+  }
 
   shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i -= 1) {
@@ -40,19 +52,28 @@ class Questions extends Component {
     this.setState({ showColors: true });
   };
 
-  render() {
-    const { category, question, correctAnswer, incorrectAnswers } = this.props;
+  defineOrder = () => {
+    const { correctAnswer, incorrectAnswers } = this.props;
+    let { answersOrder } = this.setState;
 
     const answers = this.shuffleArray([correctAnswer, ...incorrectAnswers]);
 
-    const { showColors } = this.state;
+    answersOrder = answers;
+    this.setState({ answersOrder });
+
+    return answersOrder;
+  };
+
+  render() {
+    const { category, question } = this.props;
+    const { showColors, answersOrder } = this.state;
 
     return (
       <div>
         <h2 data-testid="question-category">{ category }</h2>
         <p data-testid="question-text">{ question }</p>
         <div data-testid="answer-options">
-          { answers.map((answer, index) => (
+          { answersOrder.map((answer, index) => (
             <button
               key={ index }
               data-testid={ this.isCorrect(answer) }
