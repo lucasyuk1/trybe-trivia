@@ -5,12 +5,16 @@ class Questions extends Component {
   state = {
     showColors: false,
     answersOrder: [],
+    timer: 30,
+    disabled: false,
   };
 
   componentDidMount() {
     const { answersOrder } = this.state;
     this.defineOrder();
     console.log('ordem :', answersOrder);
+    const secondsInterval = 1000;
+    setTimeout(() => this.funcTimer(), secondsInterval);
   }
 
   componentDidUpdate() {
@@ -64,9 +68,25 @@ class Questions extends Component {
     return answersOrder;
   };
 
+  funcTimer = () => {
+    let { timer, disabled } = this.state;
+    const secondsInterval = 1000;
+    console.log('rodou functimer');
+
+    setInterval(() => {
+      if (timer > 0) {
+        timer -= 1;
+        this.setState({ timer });
+      } else {
+        disabled = true;
+        this.setState({ disabled });
+      }
+    }, secondsInterval);
+  };
+
   render() {
     const { category, question } = this.props;
-    const { showColors, answersOrder } = this.state;
+    const { showColors, answersOrder, timer, disabled } = this.state;
 
     return (
       <div>
@@ -78,12 +98,14 @@ class Questions extends Component {
               key={ index }
               data-testid={ this.isCorrect(answer) }
               type="button"
+              disabled={ disabled }
               className={ showColors ? this.colorSwitch(answer) : '' }
               onClick={ () => this.colorCorrect(answer) }
             >
               { answer }
             </button>))}
         </div>
+        <h3>{`Restam ${timer} segundo(s)`}</h3>
       </div>
     );
   }
