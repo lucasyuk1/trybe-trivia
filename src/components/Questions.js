@@ -14,8 +14,6 @@ class Questions extends Component {
     magicNumber: 5,
   };
 
-  // comentário teste
-
   componentDidMount() {
     // const { answersOrder } = this.state;
     this.defineOrder();
@@ -58,6 +56,7 @@ class Questions extends Component {
     const { timer } = this.state;
     const { correctAnswer, difficulty, dispatch } = this.props;
     let { score } = this.props;
+
     const difficultyEasy = 1;
     const difficultyMedium = 2;
     const difficultyHard = 3;
@@ -79,7 +78,7 @@ class Questions extends Component {
       const ten = 10;
       const points = score + ten + (timer * difficultyMeter);
       score = points;
-      // console.log('Score after: ', score);
+      console.log('Score after: ', score);
       this.setState({ showNextButton: true });
       dispatch(incrementScore({ score }));
       assertions += 1;
