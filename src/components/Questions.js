@@ -132,7 +132,7 @@ class Questions extends Component {
     if (currentQuest === magicNumber) {
       return console.log('acabou');
     }
-    // (<Redirect to="/feedback" />);
+    // (<Redirect to="/feedbackk" />);
     return (
       <div>
         <h2 data-testid="question-category">{ category }</h2>
