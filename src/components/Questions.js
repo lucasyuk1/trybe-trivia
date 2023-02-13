@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { Redirect } from 'react-router-dom';
-import { incrementQuest, incrementScore } from '../redux/actions';
+import { incrementQuest, incrementScore, incrementAssertions } from '../redux/actions';
 
 class Questions extends Component {
   state = {
@@ -73,14 +73,18 @@ class Questions extends Component {
     }
 
     if (answer === correctAnswer) {
-      console.log('certa resposta!');
-      console.log('Score: ', score);
+      // console.log('certa resposta!');
+      // console.log('Score: ', score);
+      let { assertions } = this.props;
+
       const ten = 10;
       const points = score + ten + (timer * difficultyMeter);
       score = points;
-      console.log('Score after: ', score);
+      // console.log('Score after: ', score);
       this.setState({ showNextButton: true });
       dispatch(incrementScore({ score }));
+      assertions += 1;
+      dispatch(incrementAssertions(assertions));
     } else {
       this.setState({ showNextButton: true });
       console.log('resposta incorreta');
@@ -119,7 +123,7 @@ class Questions extends Component {
     if (currentQuest < magicNumber) {
       currentQuest += 1;
       dispatch(incrementQuest(currentQuest));
-      console.log(currentQuest);
+      // console.log(currentQuest);
     }
   };
 
@@ -178,6 +182,7 @@ Questions.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  assertions: PropTypes.number.isRequired,
 /*   player: PropTypes.shape({
     score: PropTypes.number,
   }).isRequired, */
