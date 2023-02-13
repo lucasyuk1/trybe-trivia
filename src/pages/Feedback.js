@@ -25,11 +25,15 @@ class Feedback extends Component {
           { playerName }
         </h3>
         <h4 data-testid="header-score">{ playerScore }</h4>
-        <h4 data-testid="header-score">{ playerAssertions }</h4>
+
         { this.renderAssertions() ? (
           <h5 data-testid="feedback-text">Well Done!</h5>
         ) : (
           <h5 data-testid="feedback-text">Could be better...</h5>)}
+
+        <h5 data-testid="feedback-total-score">{ playerScore }</h5>
+        <h5 data-testid="feedback-total-question">{ playerAssertions }</h5>
+
       </div>
     );
   }
