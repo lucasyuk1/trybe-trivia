@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import GameHeader from '../components/GameHeader';
 import Questions from '../components/Questions';
@@ -7,7 +8,6 @@ import { fetchQuestions } from '../services/apiTrivia';
 class Game extends Component {
   state = {
     questions: [],
-    currentQuest: 0,
   };
 
   async componentDidMount() {
@@ -26,7 +26,8 @@ class Game extends Component {
   }
 
   render() {
-    const { questions, currentQuest } = this.state;
+    const { questions } = this.state;
+    const { currentQuest } = this.props;
     console.log(currentQuest);
     return (
       <div>
@@ -50,6 +51,9 @@ Game.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  currentQuest: PropTypes.number.isRequired,
 };
 
-export default Game;
+const mapStateToProps = (globalState) => ({ ...globalState.player });
+
+export default connect(mapStateToProps)(Game);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { incrementScore } from '../redux/actions';
+import { incrementQuest, incrementScore } from '../redux/actions';
 
 class Questions extends Component {
   state = {
@@ -87,18 +87,14 @@ class Questions extends Component {
 
   defineOrder = () => {
     const { correctAnswer, incorrectAnswers } = this.props;
-    let { answersOrder } = this.setState;
 
     const answers = this.shuffleArray([correctAnswer, ...incorrectAnswers]);
 
-    answersOrder = answers;
-    this.setState({ answersOrder });
-
-    return answersOrder;
+    this.setState({ answersOrder: answers });
   };
 
   funcTimer = () => {
-    let { timer, disabled } = this.state;
+    let { timer } = this.state;
     const secondsInterval = 1000;
     console.log('props:', this.props);
 
@@ -107,10 +103,23 @@ class Questions extends Component {
         timer -= 1;
         this.setState({ timer });
       } else {
-        disabled = true;
-        this.setState({ disabled });
+        this.setState({ disabled: true });
       }
     }, secondsInterval);
+  };
+
+  handleNext = () => {
+    const { dispatch } = this.props;
+    let { currentQuest } = this.props;
+    const magicNumber = 5;
+
+    if (currentQuest < magicNumber) {
+      currentQuest += 1;
+      dispatch(incrementQuest(currentQuest));
+    } else {
+      // history.push('/feedback')
+      console.log('else');
+    }
   };
 
   render() {
@@ -135,7 +144,14 @@ class Questions extends Component {
             </button>))}
         </div>
         <div>
-          {showNextButton ? <button data-testid="btn-next">Next Button</button> : <p />}
+          {showNextButton
+            ? (
+              <button
+                data-testid="btn-next"
+                onClick={ () => this.handleNext() }
+              >
+                Next Button
+              </button>) : null}
         </div>
         <h3>{`Restam ${timer} segundo(s)`}</h3>
       </div>
@@ -151,6 +167,7 @@ Questions.propTypes = {
   incorrectAnswers: PropTypes.node.isRequired,
   dispatch: PropTypes.func.isRequired,
   score: PropTypes.number.isRequired,
+  currentQuest: PropTypes.number.isRequired,
 /*   player: PropTypes.shape({
     score: PropTypes.number,
   }).isRequired, */

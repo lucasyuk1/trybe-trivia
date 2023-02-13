@@ -1,10 +1,11 @@
-import { SUBMIT_LOGIN, INCREMENT_SCORE } from '../actions/actionTypes';
+import { SUBMIT_LOGIN, INCREMENT_SCORE, INCREMENT_QUEST } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   name: '', // nome-da-pessoa,
   assertions: 0, // número-de-acertos,
   score: 0, // pontuação
   gravatarEmail: '', // email-da-pessoa,
+  currentQuest: 0,
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -20,6 +21,11 @@ const player = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       score: action.payload.score,
+    };
+  case INCREMENT_QUEST:
+    return {
+      ...state,
+      currentQuest: action.currentQuest,
     };
   // case SAVE_SCORE:
   //   return {
