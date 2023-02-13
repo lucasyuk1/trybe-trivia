@@ -33,12 +33,13 @@ const player = (state = INITIAL_STATE, action) => {
       ...state,
       assertions: action.assertions,
     };
-  // case SAVE_SCORE:
-  //   return {
-  //     ...state,
-  //     assertions: action.payload.assertions,
-  //     score: action.payload.score,
-  //   };
+    // case SAVE_SCORE:
+    //   return {
+    //     ...state,
+    //     assertions: action.payload.assertions,
+    //     score: action.payload.score,
+    //   };
+
   default:
     return state;
   }
