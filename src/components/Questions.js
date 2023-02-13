@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { incrementScore } from '../redux/actions';
 
 class Questions extends Component {
   state = {
@@ -15,11 +17,6 @@ class Questions extends Component {
     console.log('ordem :', answersOrder);
     const secondsInterval = 1000;
     setTimeout(() => this.funcTimer(), secondsInterval);
-  }
-
-  componentDidUpdate() {
-    const { answersOrder } = this.state;
-    console.log('ordem update :', answersOrder);
   }
 
   shuffleArray = (array) => {
@@ -52,7 +49,34 @@ class Questions extends Component {
     return result;
   };
 
-  colorCorrect = () => {
+  handleClick = (answer) => {
+    const { timer } = this.state;
+    const { correctAnswer, difficulty, dispatch } = this.props;
+    let { score } = this.props;
+    const difficultyEasy = 1;
+    const difficultyMedium = 2;
+    const difficultyHard = 3;
+    let difficultyMeter = 1;
+
+    if (difficulty === 'easy') {
+      difficultyMeter = difficultyEasy;
+    } else if (difficulty === 'medium') {
+      difficultyMeter = difficultyMedium;
+    } else if (difficulty === 'hard') {
+      difficultyMeter = difficultyHard;
+    }
+
+    if (answer === correctAnswer) {
+      console.log('certa resposta!');
+      console.log('Score: ', score);
+      const ten = 10;
+      const points = score + ten + (timer * difficultyMeter);
+      score = points;
+      console.log('Score after: ', score);
+      dispatch(incrementScore({ score }));
+    } else {
+      console.log('resposta incorreta');
+    }
     this.setState({ showColors: true });
   };
 
@@ -71,7 +95,7 @@ class Questions extends Component {
   funcTimer = () => {
     let { timer, disabled } = this.state;
     const secondsInterval = 1000;
-    console.log('rodou functimer');
+    console.log('props:', this.props);
 
     setInterval(() => {
       if (timer > 0) {
@@ -100,7 +124,7 @@ class Questions extends Component {
               type="button"
               disabled={ disabled }
               className={ showColors ? this.colorSwitch(answer) : '' }
-              onClick={ () => this.colorCorrect(answer) }
+              onClick={ () => this.handleClick(answer) }
             >
               { answer }
             </button>))}
@@ -113,9 +137,17 @@ class Questions extends Component {
 
 Questions.propTypes = {
   category: PropTypes.string.isRequired,
+  difficulty: PropTypes.string.isRequired,
   question: PropTypes.string.isRequired,
   correctAnswer: PropTypes.string.isRequired,
   incorrectAnswers: PropTypes.node.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  score: PropTypes.number.isRequired,
+/*   player: PropTypes.shape({
+    score: PropTypes.number,
+  }).isRequired, */
 };
 
-export default Questions;
+const mapStateToProps = (globalState) => ({ ...globalState.player });
+
+export default connect(mapStateToProps)(Questions);
