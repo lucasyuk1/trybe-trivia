@@ -12,6 +12,8 @@ class Questions extends Component {
     showNextButton: false,
   };
 
+  // comentário teste
+
   componentDidMount() {
     const { answersOrder } = this.state;
     this.defineOrder();
