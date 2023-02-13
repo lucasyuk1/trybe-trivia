@@ -1,4 +1,4 @@
-import { INCREMENT_SCORE, SUBMIT_LOGIN } from '../actions/actionTypes';
+import { SUBMIT_LOGIN, INCREMENT_SCORE } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   name: '', // nome-da-pessoa,

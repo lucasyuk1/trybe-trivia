@@ -9,7 +9,10 @@ class Questions extends Component {
     answersOrder: [],
     timer: 30,
     disabled: false,
+    showNextButton: false,
   };
+
+  // comentário teste
 
   componentDidMount() {
     const { answersOrder } = this.state;
@@ -73,8 +76,10 @@ class Questions extends Component {
       const points = score + ten + (timer * difficultyMeter);
       score = points;
       console.log('Score after: ', score);
+      this.setState({ showNextButton: true });
       dispatch(incrementScore({ score }));
     } else {
+      this.setState({ showNextButton: true });
       console.log('resposta incorreta');
     }
     this.setState({ showColors: true });
@@ -110,7 +115,7 @@ class Questions extends Component {
 
   render() {
     const { category, question } = this.props;
-    const { showColors, answersOrder, timer, disabled } = this.state;
+    const { showColors, answersOrder, timer, disabled, showNextButton } = this.state;
 
     return (
       <div>
@@ -128,6 +133,9 @@ class Questions extends Component {
             >
               { answer }
             </button>))}
+        </div>
+        <div>
+          {showNextButton ? <button data-testid="btn-next">Next Button</button> : <p />}
         </div>
         <h3>{`Restam ${timer} segundo(s)`}</h3>
       </div>
