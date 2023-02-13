@@ -12,15 +12,14 @@ class Questions extends Component {
     disabled: false,
     showNextButton: false,
     magicNumber: 5,
-
   };
 
   // comentário teste
 
   componentDidMount() {
-    const { answersOrder } = this.state;
+    // const { answersOrder } = this.state;
     this.defineOrder();
-    console.log('ordem :', answersOrder);
+    // console.log('ordem :', answersOrder);
     const secondsInterval = 1000;
     setTimeout(() => this.funcTimer(), secondsInterval);
   }
@@ -103,7 +102,7 @@ class Questions extends Component {
   funcTimer = () => {
     let { timer } = this.state;
     const secondsInterval = 1000;
-    console.log('props:', this.props);
+    // console.log('props:', this.props);
 
     setInterval(() => {
       if (timer > 0) {
@@ -117,13 +116,18 @@ class Questions extends Component {
 
   handleNext = () => {
     const { magicNumber } = this.state;
-    const { dispatch } = this.props;
-    let { currentQuest } = this.props;
+    const { dispatch, currentQuest, history } = this.props;
+    // let { currentQuest } = this.props;
 
-    if (currentQuest < magicNumber) {
-      currentQuest += 1;
-      dispatch(incrementQuest(currentQuest));
-      // console.log(currentQuest);
+    console.log(history, 'history fora do else');
+    const currentResult = currentQuest + 1;
+    if (currentResult < magicNumber) {
+      dispatch(incrementQuest(currentResult));
+      console.log(currentResult, 'currentResult');
+      console.log(currentQuest, 'currentQuest');
+    } else {
+      history.push('/feedback');
+      console.log(history, 'history');
     }
   };
 

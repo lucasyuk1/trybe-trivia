@@ -37,9 +37,9 @@ class Feedback extends Component {
 
 Feedback.propTypes = {
   playerName: PropTypes.string.isRequired,
-  playerScore: PropTypes.string.isRequired,
+  playerScore: PropTypes.number.isRequired,
   playerImage: PropTypes.string.isRequired,
-  playerAssertions: PropTypes.string.isRequired,
+  playerAssertions: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = ({ player }) => ({
