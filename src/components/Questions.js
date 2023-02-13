@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { Redirect } from 'react-router-dom';
-import { incrementQuest, incrementScore } from '../redux/actions';
+import { incrementQuest, incrementScore, incrementAssertions } from '../redux/actions';
 
 class Questions extends Component {
   state = {
@@ -12,15 +12,12 @@ class Questions extends Component {
     disabled: false,
     showNextButton: false,
     magicNumber: 5,
-
   };
 
-  // comentário teste
-
   componentDidMount() {
-    const { answersOrder } = this.state;
+    // const { answersOrder } = this.state;
     this.defineOrder();
-    console.log('ordem :', answersOrder);
+    // console.log('ordem :', answersOrder);
     const secondsInterval = 1000;
     setTimeout(() => this.funcTimer(), secondsInterval);
   }
@@ -59,6 +56,7 @@ class Questions extends Component {
     const { timer } = this.state;
     const { correctAnswer, difficulty, dispatch } = this.props;
     let { score } = this.props;
+
     const difficultyEasy = 1;
     const difficultyMedium = 2;
     const difficultyHard = 3;
@@ -73,14 +71,18 @@ class Questions extends Component {
     }
 
     if (answer === correctAnswer) {
-      console.log('certa resposta!');
-      console.log('Score: ', score);
+      // console.log('certa resposta!');
+      // console.log('Score: ', score);
+      let { assertions } = this.props;
+
       const ten = 10;
       const points = score + ten + (timer * difficultyMeter);
       score = points;
       console.log('Score after: ', score);
       this.setState({ showNextButton: true });
       dispatch(incrementScore({ score }));
+      assertions += 1;
+      dispatch(incrementAssertions(assertions));
     } else {
       this.setState({ showNextButton: true });
       console.log('resposta incorreta');
@@ -99,7 +101,7 @@ class Questions extends Component {
   funcTimer = () => {
     let { timer } = this.state;
     const secondsInterval = 1000;
-    console.log('props:', this.props);
+    // console.log('props:', this.props);
 
     setInterval(() => {
       if (timer > 0) {
@@ -113,13 +115,18 @@ class Questions extends Component {
 
   handleNext = () => {
     const { magicNumber } = this.state;
-    const { dispatch } = this.props;
-    let { currentQuest } = this.props;
+    const { dispatch, currentQuest, history } = this.props;
+    // let { currentQuest } = this.props;
 
-    if (currentQuest < magicNumber) {
-      currentQuest += 1;
-      dispatch(incrementQuest(currentQuest));
-      console.log(currentQuest);
+    console.log(history, 'history fora do else');
+    const currentResult = currentQuest + 1;
+    if (currentResult < magicNumber) {
+      dispatch(incrementQuest(currentResult));
+      console.log(currentResult, 'currentResult');
+      console.log(currentQuest, 'currentQuest');
+    } else {
+      history.push('/feedback');
+      console.log(history, 'history');
     }
   };
 
@@ -178,6 +185,7 @@ Questions.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  assertions: PropTypes.number.isRequired,
 /*   player: PropTypes.shape({
     score: PropTypes.number,
   }).isRequired, */

@@ -1,4 +1,5 @@
-import { SUBMIT_LOGIN, INCREMENT_SCORE, INCREMENT_QUEST } from './actionTypes';
+import { SUBMIT_LOGIN, INCREMENT_SCORE, INCREMENT_QUEST,
+  ASSERTIONS } from './actionTypes';
 
 const submitLogin = (payload) => ({
   type: SUBMIT_LOGIN,
@@ -15,6 +16,11 @@ const incrementQuest = (payload) => ({
   currentQuest: payload,
 });
 
+const incrementAssertions = (payload) => ({
+  type: ASSERTIONS,
+  assertions: payload,
+});
+
 // const saveScore = (assertions, score) => ({
 //   type: SAVE_SCORE,
 //   payload: {
@@ -23,4 +29,4 @@ const incrementQuest = (payload) => ({
 //   },
 // });
 
-export { submitLogin, incrementScore, incrementQuest };
+export { submitLogin, incrementScore, incrementQuest, incrementAssertions };

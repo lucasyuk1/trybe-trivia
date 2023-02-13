@@ -1,4 +1,5 @@
-import { SUBMIT_LOGIN, INCREMENT_SCORE, INCREMENT_QUEST } from '../actions/actionTypes';
+import { SUBMIT_LOGIN, INCREMENT_SCORE, INCREMENT_QUEST,
+  ASSERTIONS } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   name: '', // nome-da-pessoa,
@@ -27,12 +28,18 @@ const player = (state = INITIAL_STATE, action) => {
       ...state,
       currentQuest: action.currentQuest,
     };
-  // case SAVE_SCORE:
-  //   return {
-  //     ...state,
-  //     assertions: action.payload.assertions,
-  //     score: action.payload.score,
-  //   };
+  case ASSERTIONS:
+    return {
+      ...state,
+      assertions: action.assertions,
+    };
+    // case SAVE_SCORE:
+    //   return {
+    //     ...state,
+    //     assertions: action.payload.assertions,
+    //     score: action.payload.score,
+    //   };
+
   default:
     return state;
   }
