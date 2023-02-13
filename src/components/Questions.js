@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+// import { Redirect } from 'react-router-dom';
 import { incrementQuest, incrementScore } from '../redux/actions';
 
 class Questions extends Component {
@@ -10,6 +11,8 @@ class Questions extends Component {
     timer: 30,
     disabled: false,
     showNextButton: false,
+    magicNumber: 5,
+
   };
 
   // comentário teste
@@ -109,23 +112,27 @@ class Questions extends Component {
   };
 
   handleNext = () => {
+    const { magicNumber } = this.state;
     const { dispatch } = this.props;
     let { currentQuest } = this.props;
-    const magicNumber = 5;
 
     if (currentQuest < magicNumber) {
       currentQuest += 1;
       dispatch(incrementQuest(currentQuest));
-    } else {
-      // history.push('/feedback')
-      console.log('else');
+      console.log(currentQuest);
     }
   };
 
   render() {
-    const { category, question } = this.props;
-    const { showColors, answersOrder, timer, disabled, showNextButton } = this.state;
+    const { category, question, currentQuest } = this.props;
+    const {
+      showColors, answersOrder, timer, disabled, showNextButton, magicNumber,
+    } = this.state;
 
+    if (currentQuest === magicNumber) {
+      return console.log('acabou');
+    }
+    // (<Redirect to="/feedback" />);
     return (
       <div>
         <h2 data-testid="question-category">{ category }</h2>
@@ -168,6 +175,9 @@ Questions.propTypes = {
   dispatch: PropTypes.func.isRequired,
   score: PropTypes.number.isRequired,
   currentQuest: PropTypes.number.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 /*   player: PropTypes.shape({
     score: PropTypes.number,
   }).isRequired, */
