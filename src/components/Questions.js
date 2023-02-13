@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Questions extends Component {
+  state = {
+    showColors: false,
+  };
+
   shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -12,15 +16,36 @@ class Questions extends Component {
 
   isCorrect = (choice) => {
     const { correctAnswer, incorrectAnswers } = this.props;
+
     let result = `wrong-answer-${incorrectAnswers.indexOf(choice)}`;
+
     if (correctAnswer === choice) {
       result = 'correct-answer';
-    } return result;
+    }
+    return result;
+  };
+
+  colorSwitch = (choice) => {
+    const { correctAnswer } = this.props;
+
+    let result = 'wrong-answer';
+
+    if (correctAnswer === choice) {
+      result = 'correct-answer';
+    }
+    return result;
+  };
+
+  colorCorrect = () => {
+    this.setState({ showColors: true });
   };
 
   render() {
     const { category, question, correctAnswer, incorrectAnswers } = this.props;
+
     const answers = this.shuffleArray([correctAnswer, ...incorrectAnswers]);
+
+    const { showColors } = this.state;
 
     return (
       <div>
@@ -31,6 +56,9 @@ class Questions extends Component {
             <button
               key={ index }
               data-testid={ this.isCorrect(answer) }
+              type="button"
+              className={ showColors ? this.colorSwitch(answer) : '' }
+              onClick={ () => this.colorCorrect(answer) }
             >
               { answer }
             </button>))}
