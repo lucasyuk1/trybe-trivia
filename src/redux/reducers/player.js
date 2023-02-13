@@ -1,4 +1,4 @@
-import { SUBMIT_LOGIN } from '../actions/actionTypes';
+import { SUBMIT_LOGIN, INCREMENT_SCORE } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   name: '', // nome-da-pessoa,
@@ -15,6 +15,11 @@ const player = (state = INITIAL_STATE, action) => {
       name: action.payload.name,
       gravatarEmail: action.payload.gravatarEmail,
       score: 0,
+    };
+  case INCREMENT_SCORE:
+    return {
+      ...state,
+      score: action.payload.score,
     };
   // case SAVE_SCORE:
   //   return {
