@@ -53,46 +53,53 @@ class Login extends Component {
           <img src={ logo } className="App-logo" alt="logo" />
           <p>SUA VEZ</p>
         </header> */}
-        <form>
-          <label htmlFor="gravatarEmail">
-            Email:
-            <input
-              id="gravatarEmail"
-              name="gravatarEmail"
-              type="email"
-              value={ gravatarEmail }
-              onChange={ this.handleChange }
-              data-testid="input-gravatar-email"
-            />
-          </label>
+        <img src='https://imgur.com/liyWz8F.png' className="App-logo"  alt="logo" />
+        <form className='login-form'>
+          <div className='input-container'>
+            <label htmlFor="gravatarEmail">
+              Email:
+              <input
+                id="gravatarEmail"
+                name="gravatarEmail"
+                type="email"
+                value={gravatarEmail}
+                onChange={this.handleChange}
+                data-testid="input-gravatar-email"
+              />
+            </label>
+          </div>
+          <div className='input-container'>
           <label htmlFor="name">
             Nome:
             <input
               id="name"
               name="name"
               type="text"
-              value={ name }
-              onChange={ this.handleChange }
+              value={name}
+              onChange={this.handleChange}
               data-testid="input-player-name"
             />
           </label>
+          </div>
           <button
             type="button"
             data-testid="btn-play"
-            disabled={ isDisabled }
-            onClick={ this.handleClick }
+            className='navigation-btn'
+            disabled={isDisabled}
+            onClick={this.handleClick}
           >
             Play
           </button>
           <button
             data-testid="btn-settings"
             type="button"
-            onClick={ this.handleClickSettings }
+            className='navigation-btn'
+            onClick={this.handleClickSettings}
           >
             Settings
           </button>
-        </form>
-      </div>
+        </form >
+      </div >
     );
   }
 }

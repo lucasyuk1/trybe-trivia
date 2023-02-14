@@ -143,33 +143,38 @@ class Questions extends Component {
     }
     // (<Redirect to="/feedback" />);
     return (
-      <div>
-        <h2 data-testid="question-category">{ category }</h2>
-        <p data-testid="question-text">{ question }</p>
-        <div data-testid="answer-options">
-          { answersOrder.map((answer, index) => (
-            <button
-              key={ index }
-              data-testid={ this.isCorrect(answer) }
-              type="button"
-              disabled={ disabled }
-              className={ showColors ? this.colorSwitch(answer) : '' }
-              onClick={ () => this.handleClick(answer) }
-            >
-              { answer }
-            </button>))}
+      <div className='game-container'>
+        <div className='category'>
+          <h2 data-testid="question-category">{category}</h2>
         </div>
-        <div>
-          {showNextButton
-            ? (
+        <div className='quest-container'>
+
+          <p data-testid="question-text">{question}</p>
+          <div data-testid="answer-options">
+            {answersOrder.map((answer, index) => (
               <button
-                data-testid="btn-next"
-                onClick={ () => this.handleNext() }
+                key={index}
+                data-testid={this.isCorrect(answer)}
+                type="button"
+                disabled={disabled}
+                className={showColors ? this.colorSwitch(answer) : ''}
+                onClick={() => this.handleClick(answer)}
               >
-                Next Button
-              </button>) : null}
+                {answer}
+              </button>))}
+          </div>
+          <div>
+            {showNextButton
+              ? (
+                <button
+                  data-testid="btn-next"
+                  onClick={() => this.handleNext()}
+                >
+                  Next Button
+                </button>) : null}
+          </div>
+          <h3>{`Restam ${timer} segundo(s)`}</h3>
         </div>
-        <h3>{`Restam ${timer} segundo(s)`}</h3>
       </div>
     );
   }
@@ -188,9 +193,9 @@ Questions.propTypes = {
     push: PropTypes.func,
   }).isRequired,
   assertions: PropTypes.number.isRequired,
-/*   player: PropTypes.shape({
-    score: PropTypes.number,
-  }).isRequired, */
+  /*   player: PropTypes.shape({
+      score: PropTypes.number,
+    }).isRequired, */
 };
 
 const mapStateToProps = (globalState) => ({ ...globalState.player });
