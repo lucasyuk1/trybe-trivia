@@ -1,5 +1,6 @@
 import { SUBMIT_LOGIN, INCREMENT_SCORE, INCREMENT_QUEST,
-  ASSERTIONS } from '../actions/actionTypes';
+  ASSERTIONS,
+  SAVE_RANKING } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   name: '', // nome-da-pessoa,
@@ -7,6 +8,7 @@ const INITIAL_STATE = {
   score: 0, // pontuação
   gravatarEmail: '', // email-da-pessoa,
   currentQuest: 0,
+  rankingList: [],
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -32,6 +34,11 @@ const player = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       assertions: action.assertions,
+    };
+  case SAVE_RANKING:
+    return {
+      ...state,
+      rankingList: [...state.rankingList, { ...action.userRank }],
     };
     // case SAVE_SCORE:
     //   return {

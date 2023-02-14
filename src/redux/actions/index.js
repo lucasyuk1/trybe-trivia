@@ -1,5 +1,5 @@
 import { SUBMIT_LOGIN, INCREMENT_SCORE, INCREMENT_QUEST,
-  ASSERTIONS } from './actionTypes';
+  ASSERTIONS, SAVE_RANKING } from './actionTypes';
 
 const submitLogin = (payload) => ({
   type: SUBMIT_LOGIN,
@@ -21,6 +21,11 @@ const incrementAssertions = (payload) => ({
   assertions: payload,
 });
 
+const saveRanking = (payload) => ({
+  type: SAVE_RANKING,
+  userRank: payload,
+});
+
 // const saveScore = (assertions, score) => ({
 //   type: SAVE_SCORE,
 //   payload: {
@@ -29,4 +34,4 @@ const incrementAssertions = (payload) => ({
 //   },
 // });
 
-export { submitLogin, incrementScore, incrementQuest, incrementAssertions };
+export { submitLogin, incrementScore, incrementQuest, incrementAssertions, saveRanking };

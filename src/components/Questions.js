@@ -14,6 +14,8 @@ class Questions extends Component {
     magicNumber: 5,
   };
 
+  // comentário teste
+
   componentDidMount() {
     // const { answersOrder } = this.state;
     this.defineOrder();
@@ -78,14 +80,14 @@ class Questions extends Component {
       const ten = 10;
       const points = score + ten + (timer * difficultyMeter);
       score = points;
-      console.log('Score after: ', score);
+      // console.log('Score after: ', score);
       this.setState({ showNextButton: true });
       dispatch(incrementScore({ score }));
       assertions += 1;
       dispatch(incrementAssertions(assertions));
     } else {
       this.setState({ showNextButton: true });
-      console.log('resposta incorreta');
+      // console.log('resposta incorreta');
     }
     this.setState({ showColors: true });
   };
@@ -118,12 +120,12 @@ class Questions extends Component {
     const { dispatch, currentQuest, history } = this.props;
     // let { currentQuest } = this.props;
 
-    console.log(history, 'history fora do else');
+    // console.log(history, 'history fora do else');
     const currentResult = currentQuest + 1;
     if (currentResult < magicNumber) {
       dispatch(incrementQuest(currentResult));
-      console.log(currentResult, 'currentResult');
-      console.log(currentQuest, 'currentQuest');
+      // console.log(currentResult, 'currentResult');
+      // console.log(currentQuest, 'currentQuest');
     } else {
       history.push('/feedback');
       console.log(history, 'history');

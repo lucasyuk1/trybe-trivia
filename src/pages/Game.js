@@ -28,7 +28,7 @@ class Game extends Component {
   render() {
     const { questions } = this.state;
     const { currentQuest, history } = this.props;
-    console.log(history, 'history');
+    // console.log(history, 'history');
     return (
       <div>
         <GameHeader />
