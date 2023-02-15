@@ -63,7 +63,7 @@ class Feedback extends Component {
 
         <button
           type="button"
-          className='navigation-btn'
+          className="navigation-btn"
           data-testid="btn-play-again"
           onClick={ () => this.handlePlayAgain() }
         >
@@ -71,7 +71,7 @@ class Feedback extends Component {
         </button>
         <button
           type="button"
-          className='navigation-btn'
+          className="navigation-btn"
           data-testid="btn-ranking"
           onClick={ () => history.push('/ranking') }
         >

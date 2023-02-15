@@ -8,10 +8,13 @@ class GameHeader extends Component {
     const { name, gravatarEmail, score } = this.props;
     const emailHash = md5(gravatarEmail).toString();
     return (
-      <div className='game-header'>
-        <img data-testid="header-profile-picture" className='gravatar-foto' src={ `https://www.gravatar.com/avatar/${emailHash}` } alt="avatar" />
+      <div className="game-header">
+        <img data-testid="header-profile-picture" className="gravatar-foto" src={ `https://www.gravatar.com/avatar/${emailHash}` } alt="avatar" />
         <p data-testid="header-player-name">{ name }</p>
-        <p data-testid="header-score">Pontos: { score }</p>
+        <p data-testid="header-score">
+          Pontos:
+          { score }
+        </p>
       </div>
     );
   }

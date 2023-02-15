@@ -43,7 +43,7 @@ class Ranking extends Component {
           </div>))}
         <button
           type="button"
-          className='navigation-btn'
+          className="navigation-btn"
           data-testid="btn-go-home"
           onClick={ () => this.handlePlayAgain() }
         >

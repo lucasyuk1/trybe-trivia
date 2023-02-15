@@ -143,37 +143,40 @@ class Questions extends Component {
     }
     // (<Redirect to="/feedback" />);
     return (
-      <div className='game-container'>
-        <div className='category'>
-          <h2 data-testid="question-category">{category}</h2>
-        </div>
-        <div className='quest-container'>
-
-          <p data-testid="question-text">{question}</p>
-          <div data-testid="answer-options">
-            {answersOrder.map((answer, index) => (
-              <button
-                key={index}
-                data-testid={this.isCorrect(answer)}
-                type="button"
-                disabled={disabled}
-                className={showColors ? this.colorSwitch(answer) : ''}
-                onClick={() => this.handleClick(answer)}
-              >
-                {answer}
-              </button>))}
+      <div className="game-container">
+        <div className="left-box">
+          <div className="category">
+            <h2 data-testid="question-category">{category}</h2>
           </div>
+          <div className="quest-container">
+            <p data-testid="question-text">{question}</p>
+            <h3>{`Restam ${timer} segundo(s)`}</h3>
+          </div>
+        </div>
+        <div data-testid="answer-options" className="right-box">
+          {answersOrder.map((answer, index) => (
+            <button
+              key={ index }
+              data-testid={ this.isCorrect(answer) }
+              type="button"
+              disabled={ disabled }
+              id="quest-id"
+              className={ showColors ? this.colorSwitch(answer) : '' }
+              onClick={ () => this.handleClick(answer) }
+            >
+              {answer}
+            </button>))}
           <div>
             {showNextButton
               ? (
                 <button
                   data-testid="btn-next"
-                  onClick={() => this.handleNext()}
+                  className="next-btn"
+                  onClick={ () => this.handleNext() }
                 >
                   Next Button
                 </button>) : null}
           </div>
-          <h3>{`Restam ${timer} segundo(s)`}</h3>
         </div>
       </div>
     );
