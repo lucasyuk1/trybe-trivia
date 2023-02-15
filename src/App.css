@@ -91,7 +91,7 @@ body {
 
 .gravatar-foto{
   border-radius: 100%;
-  border: 1px solid #3C1B7A;
+  border: 2px solid white;
 }
 
 .game-container {
@@ -209,6 +209,48 @@ body {
   padding: 30px;
   width: 350px;
   margin: auto;
+}
+
+.feedback-box{
+  background-color: #FFFFFF;
+  width: 410px;
+  padding: 12px;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.head-score {
+  color: #FFFFFF;
+}
+
+.well-result{
+  color: #2FC18C;
+  font-size: 20px;
+}
+
+.ranking-container {
+  background-color: #FFFFFF;
+  width: 410px;
+  padding: 12px;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.player-rank {
+  background-color: #EBEBEB;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 7px;
+  margin: 15px;
+  border-radius: 50px;
+}
+
+.score-player {
+  background-color: #FFFFFF;
+  padding: 20px;
+  border-radius: 50px;
+  font-weight: bold;
 }
 
 

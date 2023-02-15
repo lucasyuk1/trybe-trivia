@@ -29,17 +29,25 @@ class Ranking extends Component {
   render() {
     const { ordernedList } = this.state;
     return (
-      <div>
+      <div className="ranking-container">
         <h1 data-testid="ranking-title">Ranking</h1>
         {ordernedList.map(({ playerImage, playerName, playerScore }, index) => (
-          <div key={ index }>
+          <div className="player-rank" key={ index }>
             <img
               data-testid="header-profile-picture"
+              className="gravatar-foto"
               src={ `https://www.gravatar.com/avatar/${md5(playerImage).toString()}` }
               alt="avatar"
             />
-            <p data-testid={ `player-name-${index}` }>{ playerName }</p>
-            <p data-testid={ `player-score-${index}` }>{ playerScore }</p>
+            <p data-testid={ `player-name-${index}` }>{playerName}</p>
+            <div className="score-player">
+              <img src="https://imgur.com/JzHowRu.png" alt="star" />
+              <p data-testid={ `player-score-${index}` }>
+                {playerScore}
+                {' '}
+                Pontos
+              </p>
+            </div>
           </div>))}
         <button
           type="button"

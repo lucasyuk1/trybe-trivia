@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import md5 from 'crypto-js/md5';
 import { saveRanking, incrementQuest } from '../redux/actions';
 
 class Feedback extends Component {
@@ -38,29 +39,43 @@ class Feedback extends Component {
   render() {
     const { playerName, playerScore, playerImage, playerAssertions,
       history } = this.props;
-
+    const emailHash = md5(playerImage).toString();
     return (
       <div>
         <img
           data-testid="header-profile-picture"
-          src={ playerImage }
+          className="gravatar-foto"
+          src={ `https://www.gravatar.com/avatar/${emailHash}` }
           alt={ `Imagem de ${playerName}` }
         />
-        <h3
-          data-testid="header-player-name"
-        >
-          { playerName }
-        </h3>
-        <h4 data-testid="header-score">{ playerScore }</h4>
+        <div className="feedback-box">
+          <h3
+            data-testid="header-player-name"
+          >
+            {playerName}
+          </h3>
+          <h4 data-testid="header-score" className="head-score">{playerScore}</h4>
 
-        { this.renderAssertions() ? (
-          <h5 data-testid="feedback-text">Well Done!</h5>
-        ) : (
-          <h5 data-testid="feedback-text">Could be better...</h5>)}
+          {this.renderAssertions() ? (
+            <h5 data-testid="feedback-text" className="well-result">Well Done!</h5>
+          ) : (
+            <h5 data-testid="feedback-text" className="bad-result">
+              Could be better...
+            </h5>)}
 
-        <h5 data-testid="feedback-total-score">{ playerScore }</h5>
-        <h5 data-testid="feedback-total-question">{ playerAssertions }</h5>
-
+          <h5 data-testid="feedback-total-score">
+            Você fez
+            {playerScore}
+            {' '}
+            pontos!
+          </h5>
+          <h5 data-testid="feedback-total-question">
+            Acertou
+            {playerAssertions}
+            {' '}
+            questões!
+          </h5>
+        </div>
         <button
           type="button"
           className="navigation-btn"
