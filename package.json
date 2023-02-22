@@ -1,6 +1,7 @@
 {
   "name": "trivia-react-redux",
   "version": "0.1.0",
+  "homepage": "https://lucasyuk1.github.io/trybe-trivia",
   "private": true,
   "engines": {
     "node": "16 || 18"
@@ -52,6 +53,7 @@
     "@trybe/eslint-config-frontend": "^1.7.1",
     "cypress": "^10.11.0",
     "cypress-multi-reporters": "^1.6.2",
+    "gh-pages": "^5.0.0",
     "jest-localstorage-mock": "2.4.26",
     "mocha": "^10.2.0",
     "mochawesome": "^7.1.3",
