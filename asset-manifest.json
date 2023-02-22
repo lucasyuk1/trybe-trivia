@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/trybe-trivia/static/css/main.103e33a8.css",
+    "main.js": "/trybe-trivia/static/js/main.ad4c0f31.js",
+    "index.html": "/trybe-trivia/index.html",
+    "main.103e33a8.css.map": "/trybe-trivia/static/css/main.103e33a8.css.map",
+    "main.ad4c0f31.js.map": "/trybe-trivia/static/js/main.ad4c0f31.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.103e33a8.css",
+    "static/js/main.ad4c0f31.js"
+  ]
+}
